@@ -1,10 +1,6 @@
 
-# set data source
-getwd()
-setwd("/Users/jack/Documents/Github/Buoy-Analysis")
-
 # read in data set
-data <- read.table("41004h2015.txt", header = TRUE, sep=',')
+data <- read.table("https://www.ndbc.noaa.gov/view_text_file.php?filename=41004h2015.txt.gz&dir=data/historical/stdmet/", header = F)
 indx <- sapply(data, is.factor)
 data[indx] <- lapply(data[indx], function(x) as.numeric(as.character(x)))
 
@@ -12,6 +8,7 @@ data[indx] <- lapply(data[indx], function(x) as.numeric(as.character(x)))
 data <- data[-1,]
 data <- data[,-c(17,18)]
 rownames(data) <- seq(length=nrow(data))
+colnames(data) <- c("YY", "MM", "DD", "hh", "mm", "WDIR", "WSPD", "GST" , "WVHT", "DPD" , "APD" , "MWD" , "PRES", "ATMP", "WTMP", "DEWP")
 for (j in 1:length(data$WVHT))
 {
   if (data$WVHT[j]>20) {
@@ -31,7 +28,7 @@ par(mfrow=c(2,2))
 plot(MM, ATMP, pch=15, cex=.7)
 plot(PRES, WSPD, pch=20, cex=.4); abline(v=1013.25, lty=2, col='blue')
 plot(DPD, WVHT, pch=20, cex=.4)
-plot(WTMP[-c(1847,1848)], WVHT[-c(1847,1848)], pch=20, cex=.4)
+plot(WTMP[-c(1846,1847)], WVHT[-c(1846,1847)], pch=20, cex=.4)
 dev.off()
 
 # plot a wave period vs direction chart, non-polar
