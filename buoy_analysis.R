@@ -44,11 +44,26 @@ for (j in 1:length(MM))
 plot(DPD, MWD, col=szn.col, pch=20, main='Relationship Between Wave Period and Direction', cex=.5)
 legend('topright', legend=c("Winter", "Spring", "Summer", "Fall"), pch=20, col=s.col)
 
+# plot each season by itself
+par(mfrow = c(2, 2))
+plot(DPD[szn.col=="deepskyblue"], MWD[szn.col=="deepskyblue"], col="deepskyblue", pch=20, main='Winter', cex=.5, xlab="DPD", ylab="MWD")
+plot(DPD[szn.col=="chartreuse1"], MWD[szn.col=="chartreuse1"], col="chartreuse1", pch=20, main='Spring', cex=.5, xlab="DPD", ylab="MWD")
+plot(DPD[szn.col=="gold"], MWD[szn.col=="gold"], col="gold", pch=20, main='Summer', cex=.5, xlab="DPD", ylab="MWD")
+plot(DPD[szn.col=="darkorange2"], MWD[szn.col=="darkorange2"], col="darkorange2", pch=20, main='Fall', cex=.5, xlab="DPD", ylab="MWD")
+dev.off()
+
 # plot the same data on a polar graph
 library(plotrix)
 polar.plot(DPD,MWD,main="Dominant Wave Period by Direction (Buoy 41004 - 2015)",lwd=1,line.col=szn.col,start=90,clockwise=TRUE,show.grid.labels=2)
 legend('bottomleft', legend=c("Winter", "Spring", "Summer", "Fall"), lty=1, col=s.col)
 # polar.plot(DPD,MWD,main="Dominant Wave Period by Direction (Buoy 41004 - 2015)",lwd=.1,line.col=4,start=90,clockwise=TRUE,rp.type='s',point.symbols=20,show.grid.labels=2)
+
+# plot each season by itself
+par(mfrow = c(2, 2))
+polar.plot(DPD[szn.col=="deepskyblue"], MWD[szn.col=="deepskyblue"],main="Winter",lwd=1,line.col="deepskyblue",start=90,clockwise=TRUE,show.grid.labels=F)
+polar.plot(DPD[szn.col=="chartreuse1"], MWD[szn.col=="chartreuse1"],main="Spring",lwd=1,line.col="chartreuse1",start=90,clockwise=TRUE,show.grid.labels=F)
+polar.plot(DPD[szn.col=="gold"], MWD[szn.col=="gold"],main="Summer",lwd=1,line.col="gold",start=90,clockwise=TRUE,show.grid.labels=F)
+polar.plot(DPD[szn.col=="darkorange2"], MWD[szn.col=="darkorange2"],main="Fall",lwd=1,line.col="darkorange2",start=90,clockwise=TRUE,show.grid.labels=F)
 
 # overlay a simplified polar plot over a map of the region
 library(rworldmap)
